@@ -16,13 +16,14 @@ description: Draft a short, honest pitch email to a prospect with their labelled
 - The Bot's `@mail.grokbot.com` address, or the **Gmail** plugin if the user connected it.
 
 ## Steps
-1. **Find the contact** on the prospect's own site: a published contact or founder email, or their contact form. Product Hunt never publishes emails. If the only route is a form or an X DM, prepare the text and hand it to the user; the Bot doesn't submit forms or send DMs.
+1. **Find the contact** on the prospect's own site: a published contact or founder email, or their contact form. Product Hunt never publishes emails; for local businesses, use the email on their site or their contact form (never phone them). If the only route is a form or an X DM, prepare the text and hand it to the user; the Bot doesn't submit forms or send DMs.
 2. **Write the email** (under 120 words, plain text, no tracking, no attachments other than the sample):
-   - Subject: `<Product> launch film: a 10 s sample`
+   - Subject: `<Product> launch film: a 10 s sample` (software), or `A 10-second video for <Business>` (every other market)
    - Line 1: what you made and why, **true for this prospect's `source` and launch date** (`prospects.csv`):
      - `ph-upcoming` / `x` with a launch date still ahead: "You're launching on <date>; I made a 10-second sample from your public screenshots."
      - launched today (`apify-daily`, or the date is today): "Congrats on today's launch. I made a 10-second sample from your public screenshots."
      - launched earlier: "I made a 10-second sample of <product> from your public screenshots", pitched for their next feature announcement. Never imply a launch that already happened is still coming.
+     - `gmaps:<market>` (local and other businesses): "I made a 10-second video for <Business> from your website, the kind you can run as an ad or put on your homepage." No launch language. Line 2 offers the pilot from `references/markets.md` (a 20–30 s film + 2 hooks + 16:9 and 9:16), and monthly variants if they run ads.
    - Line 2: what the full film would be (length, aspects; "delivered before launch day" only when the launch is ahead).
    - Line 3: the ask ("Want a quote for the full film?"). No price unless the user set one for this pitch.
    - Footer: the user's name and studio, and the line "Unsolicited sample · made from your public materials. Reply 'no thanks' and I won't write again."

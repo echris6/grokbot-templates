@@ -1,12 +1,12 @@
-# Motion Studio: launch videos for software, written as code
+# Motion Studio: promo and launch videos for any business, written as code
 
-**What it is:** a Bot that runs a small launch-video studio. Software companies launch new products every day, and the launches that do well usually have an animated launch video. Motion Studio makes that video as code (HTML/GSAP motion, three.js where 3D explains something) and renders it to an MP4. No editing software.
+**What it is:** a Bot that runs a small video studio for whatever market you pick: software companies launching on Product Hunt, or local and other businesses (solar, roofing and home services, real estate, restaurants, gyms, clinics, ecommerce, B2B, venues, or anything you describe). Most of them have a website but no video. Motion Studio makes that video as code (HTML/GSAP motion, three.js where 3D explains something) and renders it to an MP4. No editing software.
 
-**What it sells:** one video per order, through a Whop checkout link made for that order: launch films (15–30 s), feature announcements (10–15 s) and short explainers (30–45 s), in 16:9, 1:1 and 9:16.
+**What it sells:** one video per order, through a Whop checkout link made for that order. For software: launch films (15–30 s), feature announcements (10–15 s) and explainers (30–45 s). For local businesses: how-it-works explainers (e.g. solar panels → inverter → meter), process and quote-request ads, menu and class promos, listing reels, and monthly ad variants. All in 16:9, 1:1 and 9:16. See `references/markets.md`.
 
 **What it does every day**
-1. Checks Product Hunt for products about to launch (its own browser, plus X search, plus today's launches through Apify as a fallback).
-2. Picks the best fit and makes a 10-second sample from their public screenshots and brand colours: their real UI lifts out, their own words type into a command bar, a cursor clicks and the UI answers, scored with a back-timed bed and UI sounds. It's labelled "Unsolicited sample · made from your public materials".
+1. Finds prospects in your markets. Software: Product Hunt launches (its own browser, X search, Apify as a fallback). Every other market: Google Maps businesses in your area that have a website but no video (Apify, about $0.16 per search).
+2. Picks the best fit and makes a 10-second sample from their public screenshots, photos and brand colours. For software, their real UI lifts out, their own words type into a command bar, and a cursor clicks and the UI answers. For a local business, their service types into their own quote or booking form and the form answers "Request sent". It's scored with a back-timed bed and UI sounds, and labelled "Unsolicited sample · made from your public materials".
 3. Shows you the sample and drafts the pitch email. **You press Send.**
 4. Checks Whop for payments on open quotes.
 

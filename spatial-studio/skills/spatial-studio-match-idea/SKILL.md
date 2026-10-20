@@ -1,6 +1,6 @@
 ---
 name: spatial-studio-match-idea
-description: Score the 11 Spatial Studio three.js business ideas against the user's interview answers, show the top 3 with why each fits and what the first sample would be, and save the pick. Use in setup, or when the user asks "which idea should I do?" or wants to switch ideas.
+description: Score the 11 Spatial Studio three.js business ideas against the user's interview answers, show the top 3 with why each fits and what the first sample would be, and save the pick: any of the 11, several at once, or a custom idea the user describes. Use in setup, or when the user asks "which idea should I do?" or wants to switch ideas.
 ---
 
 # Match the user to an idea
@@ -19,13 +19,17 @@ description: Score the 11 Spatial Studio three.js business ideas against the use
 2. Score all 11 ideas on the 6 factors in `ideas/README.md` (0–2 each). Apply the weights: halve the custom-scene ideas unless 3D comfort is 2, and show pools only for landscape or pool trades. Apply the tie-breakers.
 3. Write the scoring table to `/workspace/spatial-studio/research/idea-match-<yyyy-mm-dd>.md` (all 11 rows, factor scores, total), so the choice can be audited.
 4. Show the top 3 as a table: idea · why it fits *them* (one line, from their answers) · kit fit (ready / custom scene / kit gap) · first sample (from the idea's "Sample scope") · rerun trigger. Include floor-plan walkthroughs unless it scored 0 on both trade match and network.
-5. Ask the user to pick one. Save `spatial_studio.idea` (slug) and `spatial_studio.alternates` (the other two) in `config.json` (temp file + rename), and append a `log.md` line.
+5. Ask the user to pick. The top 3 are suggestions, not limits. Say plainly: "Or pick any of the 11 (list them by name), pick more than one, or describe your own idea." Then:
+   - **One or more of the 11:** save the first as `spatial_studio.idea` (the primary; daily prospecting starts here) and all picks as `spatial_studio.ideas` (a list of slugs).
+   - **Their own idea:** ask 3 short questions: who buys, what 2D asset they already have, and where to find them. Then copy `/workspace/grokbot-templates/spatial-studio/references/ideas/_custom-template.md` to `/workspace/spatial-studio/ideas/custom-<slug>.md` and fill every section from their answers. Mark price anchors "research before quoting", and set Kit notes to ready / custom scene / kit gap honestly. Use `custom-<slug>` as the slug.
+   - Save `spatial_studio.alternates` (any shown ideas not picked) in `config.json` (temp file + rename), and append a `log.md` line.
+   - Wherever an idea file is read, a `custom-<slug>` idea lives at `/workspace/spatial-studio/ideas/custom-<slug>.md`, and a built-in one at `/workspace/grokbot-templates/spatial-studio/references/ideas/<slug>.md`.
 6. If the pick is a **kit gap** idea, say exactly what's missing (from the idea file's "Kit notes") and that the first job will include building that piece, at higher usage.
 
 ## Check the result
 - The table has exactly 3 rows, each with a reason tied to the user's own answers (not generic).
 - No price or income figure appears. Ideas are compared on fit, not on claimed earnings.
-- `config.json` has the slug of an existing `ideas/<slug>.md`.
+- `config.json` → `spatial_studio.idea` (and every entry in `spatial_studio.ideas`) is the slug of an existing built-in `ideas/<slug>.md` or a filled `/workspace/spatial-studio/ideas/custom-<slug>.md`.
 
 ## Return
 The 3-row table, one line recommending the top pick, and the question "Which one?". After the pick: "Saved: <idea>. Next: find prospects (I'll show you the list before making any sample)."

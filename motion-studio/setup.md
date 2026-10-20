@@ -56,6 +56,10 @@ No video-generation test: a 1 s clip would still cost $0.08 and prove little. Th
 
 ```json
 "motion_studio": {
+  "markets": ["software"],
+  "area": null,
+  "min_rating": 4.0,
+  "min_reviews": 20,
   "ph_upcoming_url": null,
   "egress_routed": false,
   "samples_per_day": 1,

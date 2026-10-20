@@ -6,8 +6,8 @@ Business-in-a-box templates for **xAI Grok Bot**. Install one, answer a few ques
 |---|---|---|
 | [Launchpad](launchpad/) | Not a business: a 10-minute interview that recommends which template fits you | n/a |
 | [AI Influencer](ai-influencer/) | An AI character remakes viral clips daily; monetize with a how-it's-made guide | A guide product + a one-page `*.whop.site` |
-| [Motion Studio](motion-studio/) | Launch videos for software companies, written as code (HTML/GSAP + three.js) and rendered to MP4 | A checkout link per video + a portfolio page |
-| [Spatial Studio](spatial-studio/) | Interactive three.js sites from a business's 2D assets (floor plans and 10 more ideas) | A checkout link per unit + Whop-hosted walkthroughs |
+| [Motion Studio](motion-studio/) | Promo, launch and explainer videos for any business (software launches, solar, roofing, restaurants, gyms…), written as code (HTML/GSAP + three.js) and rendered to MP4 | A checkout link per video + a portfolio page |
+| [Spatial Studio](spatial-studio/) | Interactive three.js sites from a business's 2D assets (floor plans, 10 more ideas, or any custom market) | A checkout link per unit + Whop-hosted walkthroughs |
 
 ## How a template works on Grok Bot
 

@@ -6,7 +6,7 @@ description: Find businesses for the chosen idea that publish the 2D asset (floo
 # Find prospects
 
 ## When to use
-- The daily prospecting routine, or the user asks for prospects for the current idea (`config.json` → `spatial_studio.idea`).
+- The daily prospecting routine, or the user asks for prospects for the current idea (`config.json` → `spatial_studio.idea`, or any idea in `spatial_studio.ideas` the user names; custom ideas live at `/workspace/spatial-studio/ideas/custom-<slug>.md`).
 - Not for existing clients' new units (`spatial-studio-watch-new-units`), and not to make the sample (`spatial-studio-build-sample`).
 
 ## Inputs and access

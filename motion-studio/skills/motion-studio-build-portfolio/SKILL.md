@@ -11,7 +11,7 @@ description: Make the studio's first three sample films for products the user li
 - Not for pitching a specific prospect (`motion-studio-make-sample` + `motion-studio-draft-outreach`).
 
 ## Inputs and access
-- Three products the user picks (Product Hunt pages or sites), or ask `motion-studio-find-launches` for ideas.
+- Three products or businesses the user picks (Product Hunt pages or any business website), ideally one per market they sell to, or ask `motion-studio-find-launches` / `motion-studio-find-businesses` for ideas.
 - `motion-studio-make-sample` (does the film), `/workspace/grokbot-templates/motion-studio/site/` (page, data example, README), `/workspace/grokbot-templates/_shared/whop.md` (Recipe A, site steps).
 - Whop CLI (`WHOP_API_KEY` or `whop login --method oauth`), `config.json` → `motion_studio.portfolio`.
 
