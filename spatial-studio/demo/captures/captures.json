@@ -1,0 +1,91 @@
+{
+  "spec": "demo/sample-house.json",
+  "size": [
+    1280,
+    800
+  ],
+  "gl": "swiftshader",
+  "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)",
+  "captured_at": "2026-10-20T07:49:27.127Z",
+  "results": [
+    {
+      "view": "kitchen-01",
+      "file": "demo/captures/kitchen-01.png",
+      "ms": 9137
+    },
+    {
+      "view": "living-01",
+      "file": "demo/captures/living-01.png",
+      "ms": 5112
+    },
+    {
+      "view": "living-02",
+      "file": "demo/captures/living-02.png",
+      "ms": 5510
+    },
+    {
+      "view": "entry-01",
+      "file": "demo/captures/entry-01.png",
+      "ms": 5457
+    },
+    {
+      "view": "bed2-01",
+      "file": "demo/captures/bed2-01.png",
+      "ms": 4809
+    },
+    {
+      "view": "bath-01",
+      "file": "demo/captures/bath-01.png",
+      "ms": 6209
+    },
+    {
+      "view": "bed3-01",
+      "file": "demo/captures/bed3-01.png",
+      "ms": 5259
+    },
+    {
+      "view": "primary-01",
+      "file": "demo/captures/primary-01.png",
+      "ms": 5065
+    },
+    {
+      "view": "ensuite-01",
+      "file": "demo/captures/ensuite-01.png",
+      "ms": 5217
+    },
+    {
+      "view": "dollhouse",
+      "file": "demo/captures/dollhouse.png",
+      "ms": 5027
+    },
+    {
+      "view": "plan",
+      "file": "demo/captures/plan.png",
+      "ms": 4876,
+      "plan": {
+        "ppm": 62,
+        "cx": 7,
+        "cy": 4.8,
+        "width": 1280,
+        "height": 800
+      }
+    }
+  ],
+  "console": [
+    "warning: [.WebGL-0x11400439600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "warning: [.WebGL-0x11400439600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "warning: [.WebGL-0x11400439600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "warning: THREE.WebGLRenderer: KHR_parallel_shader_compile extension not supported.",
+    "warning: [.WebGL-0x11400439600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)",
+    "warning: THREE.WebGLRenderer: KHR_parallel_shader_compile extension not supported.",
+    "warning: THREE.WebGLRenderer: KHR_parallel_shader_compile extension not supported.",
+    "warning: THREE.WebGLRenderer: KHR_parallel_shader_compile extension not supported.",
+    "warning: THREE.WebGLRenderer: KHR_parallel_shader_compile extension not supported.",
+    "warning: THREE.WebGLRenderer: KHR_parallel_shader_compile extension not supported.",
+    "warning: THREE.WebGLRenderer: KHR_parallel_shader_compile extension not supported.",
+    "warning: THREE.WebGLRenderer: KHR_parallel_shader_compile extension not supported.",
+    "warning: THREE.WebGLRenderer: KHR_parallel_shader_compile extension not supported.",
+    "warning: THREE.WebGLRenderer: KHR_parallel_shader_compile extension not supported.",
+    "warning: THREE.WebGLRenderer: KHR_parallel_shader_compile extension not supported."
+  ]
+}

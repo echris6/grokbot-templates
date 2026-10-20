@@ -1,0 +1,58 @@
+{
+ "collision_wall": {
+  "pushed_to": [
+   7.2,
+   4.18
+  ],
+  "ok": true
+ },
+ "collision_doorway": {
+  "at": [
+   8.7,
+   3.9
+  ],
+  "ok": true
+ },
+ "start": {
+  "position": [
+   7.2,
+   1.55,
+   9.15
+  ],
+  "yaw": 0,
+  "room": "hall"
+ },
+ "end": {
+  "position": [
+   7.2,
+   1.578,
+   8.893
+  ],
+  "yaw": 0,
+  "room": "hall"
+ },
+ "moved_m": 0.26,
+ "stayed_in_room": "hall",
+ "jumped": {
+  "mode": "walk",
+  "cam": {
+   "position": [
+    5.023,
+    3.426,
+    6.605
+   ],
+   "yaw": 0.74,
+   "room": "living"
+  }
+ },
+ "phone_after_tap": {
+  "position": [
+   6,
+   1.5,
+   4.3
+  ],
+  "yaw": -5.417,
+  "room": "kitchen"
+ },
+ "errors": []
+}

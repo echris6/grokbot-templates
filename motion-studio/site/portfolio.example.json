@@ -1,0 +1,16 @@
+{
+  "studio": "Your Studio",
+  "headline": "Launch films, written as code.",
+  "subhead": "Short animated launch videos for software products, built from your own screenshots and brand.",
+  "contact": "hello@yourstudio.example",
+  "films": [
+    {
+      "title": "Product name",
+      "file": "/videos/film-1.mp4",
+      "poster": "/videos/film-1.jpg",
+      "label": "Unofficial concept · not affiliated with Product name",
+      "note": "10 s · 16:9 · made from public screenshots"
+    }
+  ],
+  "footer": "Concept films are labelled. No client logos are shown without permission."
+}

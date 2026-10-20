@@ -1,0 +1,1576 @@
+{
+ "$schema": "../kit/core/schema/house.schema.json",
+ "version": 1,
+ "meta": {
+  "name": "The Larch \u00b7 3 bed 2 bath",
+  "fictional": true,
+  "label": "Fictional sample house \u00b7 not a real property",
+  "units": "m",
+  "source_plan": "sample-plan.png",
+  "stated_area_m2": 140.4,
+  "stated_area_sqft": 1511,
+  "stated_area_basis": "gross, to the outside face of exterior walls",
+  "north_deg": 0,
+  "notes": "Single storey, 14.25 x 9.85 m outside. Coordinates are wall centrelines, metres, origin at the north-west wall centreline corner, y runs down the plan (south)."
+ },
+ "defaults": {
+  "wall_height": 2.7,
+  "wall_thickness": 0.12,
+  "exterior_wall_thickness": 0.25,
+  "eye_height": 1.6,
+  "floor": "oak_floor",
+  "wall": "cream_wall",
+  "ceiling": "white_ceiling"
+ },
+ "materials": {
+  "oak_floor": {
+   "color": "#bf9d74",
+   "roughness": 0.5,
+   "pattern": "planks",
+   "plank_width": 0.19,
+   "plank_length": 1.4
+  },
+  "bath_floor": {
+   "color": "#c9c4bc",
+   "roughness": 0.35,
+   "pattern": "tiles",
+   "tile_size_m": 0.6,
+   "grout_color": "#b5afa6"
+  },
+  "bath_wall": {
+   "color": "#efede9",
+   "roughness": 0.22,
+   "pattern": "tiles",
+   "tile_size_m": [
+    0.3,
+    0.6
+   ],
+   "stagger": true,
+   "grout_color": "#dad6cf"
+  },
+  "bedroom_carpet": {
+   "color": "#cdbfa9",
+   "roughness": 1,
+   "pattern": "carpet"
+  },
+  "sage": {
+   "color": "#7d8b78",
+   "roughness": 0.5
+  },
+  "walnut": {
+   "color": "#7a5a43",
+   "roughness": 0.55
+  },
+  "oatmeal_fabric": {
+   "color": "#b9b0a1",
+   "roughness": 0.95,
+   "pattern": "fabric"
+  },
+  "slate_fabric": {
+   "color": "#6f747a",
+   "roughness": 0.95,
+   "pattern": "fabric"
+  }
+ },
+ "render": {
+  "sun_azimuth_deg": 215,
+  "sun_elevation_deg": 30,
+  "sun_intensity": 2.6,
+  "env_intensity": 0.6,
+  "hemi_intensity": 0.65,
+  "exposure": 1.0
+ },
+ "levels": [
+  {
+   "id": "L1",
+   "name": "Ground floor",
+   "elevation": 0,
+   "height": 2.7,
+   "rooms": [
+    {
+     "id": "kitchen",
+     "name": "Kitchen",
+     "polygon": [
+      [
+       0,
+       0
+      ],
+      [
+       6.4,
+       0
+      ],
+      [
+       6.4,
+       4.4
+      ],
+      [
+       0,
+       4.4
+      ]
+     ]
+    },
+    {
+     "id": "living",
+     "name": "Living / Dining",
+     "polygon": [
+      [
+       0,
+       4.4
+      ],
+      [
+       6.4,
+       4.4
+      ],
+      [
+       6.4,
+       9.6
+      ],
+      [
+       0,
+       9.6
+      ]
+     ]
+    },
+    {
+     "id": "bed2",
+     "name": "Bedroom 2",
+     "polygon": [
+      [
+       6.4,
+       0
+      ],
+      [
+       9.4,
+       0
+      ],
+      [
+       9.4,
+       3.9
+      ],
+      [
+       6.4,
+       3.9
+      ]
+     ],
+     "floor": "bedroom_carpet"
+    },
+    {
+     "id": "bath",
+     "name": "Bathroom",
+     "polygon": [
+      [
+       9.4,
+       0
+      ],
+      [
+       11.3,
+       0
+      ],
+      [
+       11.3,
+       3.9
+      ],
+      [
+       9.4,
+       3.9
+      ]
+     ],
+     "floor": "bath_floor",
+     "wall": "bath_wall"
+    },
+    {
+     "id": "bed3",
+     "name": "Bedroom 3",
+     "polygon": [
+      [
+       11.3,
+       0
+      ],
+      [
+       14,
+       0
+      ],
+      [
+       14,
+       3.9
+      ],
+      [
+       11.3,
+       3.9
+      ]
+     ],
+     "floor": "bedroom_carpet"
+    },
+    {
+     "id": "hall",
+     "name": "Entry / Hall",
+     "polygon": [
+      [
+       6.4,
+       3.9
+      ],
+      [
+       14,
+       3.9
+      ],
+      [
+       14,
+       5.1
+      ],
+      [
+       8.0,
+       5.1
+      ],
+      [
+       8.0,
+       9.6
+      ],
+      [
+       6.4,
+       9.6
+      ]
+     ],
+     "label_at": [
+      11.3,
+      4.5
+     ]
+    },
+    {
+     "id": "ensuite",
+     "name": "Ensuite",
+     "polygon": [
+      [
+       8.0,
+       5.1
+      ],
+      [
+       10.2,
+       5.1
+      ],
+      [
+       10.2,
+       7.5
+      ],
+      [
+       8.0,
+       7.5
+      ]
+     ],
+     "floor": "bath_floor",
+     "wall": "bath_wall"
+    },
+    {
+     "id": "wic",
+     "name": "Walk-in robe",
+     "polygon": [
+      [
+       8.0,
+       7.5
+      ],
+      [
+       10.2,
+       7.5
+      ],
+      [
+       10.2,
+       9.6
+      ],
+      [
+       8.0,
+       9.6
+      ]
+     ],
+     "floor": "bedroom_carpet"
+    },
+    {
+     "id": "primary",
+     "name": "Primary bedroom",
+     "polygon": [
+      [
+       10.2,
+       5.1
+      ],
+      [
+       14,
+       5.1
+      ],
+      [
+       14,
+       9.6
+      ],
+      [
+       10.2,
+       9.6
+      ]
+     ],
+     "floor": "bedroom_carpet"
+    }
+   ],
+   "walls": [
+    {
+     "id": "ext-n",
+     "a": [
+      0,
+      0
+     ],
+     "b": [
+      14,
+      0
+     ],
+     "exterior": true
+    },
+    {
+     "id": "ext-e",
+     "a": [
+      14,
+      0
+     ],
+     "b": [
+      14,
+      9.6
+     ],
+     "exterior": true
+    },
+    {
+     "id": "ext-s",
+     "a": [
+      14,
+      9.6
+     ],
+     "b": [
+      0,
+      9.6
+     ],
+     "exterior": true
+    },
+    {
+     "id": "ext-w",
+     "a": [
+      0,
+      9.6
+     ],
+     "b": [
+      0,
+      0
+     ],
+     "exterior": true
+    },
+    {
+     "id": "w-great",
+     "a": [
+      6.4,
+      0
+     ],
+     "b": [
+      6.4,
+      9.6
+     ]
+    },
+    {
+     "id": "w-hall-n",
+     "a": [
+      6.4,
+      3.9
+     ],
+     "b": [
+      14,
+      3.9
+     ]
+    },
+    {
+     "id": "w-n1",
+     "a": [
+      9.4,
+      0
+     ],
+     "b": [
+      9.4,
+      3.9
+     ]
+    },
+    {
+     "id": "w-n2",
+     "a": [
+      11.3,
+      0
+     ],
+     "b": [
+      11.3,
+      3.9
+     ]
+    },
+    {
+     "id": "w-hall-s",
+     "a": [
+      8.0,
+      5.1
+     ],
+     "b": [
+      14,
+      5.1
+     ]
+    },
+    {
+     "id": "w-foyer",
+     "a": [
+      8.0,
+      5.1
+     ],
+     "b": [
+      8.0,
+      9.6
+     ]
+    },
+    {
+     "id": "w-mid",
+     "a": [
+      10.2,
+      5.1
+     ],
+     "b": [
+      10.2,
+      9.6
+     ]
+    },
+    {
+     "id": "w-ens",
+     "a": [
+      8.0,
+      7.5
+     ],
+     "b": [
+      10.2,
+      7.5
+     ]
+    }
+   ],
+   "openings": [
+    {
+     "id": "win-kitchen",
+     "wall": "ext-n",
+     "type": "window",
+     "offset": 3.2,
+     "width": 1.6,
+     "sill": 1.05,
+     "height": 1.05,
+     "curtains": false
+    },
+    {
+     "id": "win-bed2",
+     "wall": "ext-n",
+     "type": "window",
+     "offset": 7.9,
+     "width": 1.4,
+     "sill": 0.9,
+     "height": 1.3
+    },
+    {
+     "id": "win-bath",
+     "wall": "ext-n",
+     "type": "window",
+     "offset": 10.35,
+     "width": 0.6,
+     "sill": 1.5,
+     "height": 0.6,
+     "frosted": true
+    },
+    {
+     "id": "win-bed3",
+     "wall": "ext-n",
+     "type": "window",
+     "offset": 12.65,
+     "width": 1.4,
+     "sill": 0.9,
+     "height": 1.3
+    },
+    {
+     "id": "win-hall",
+     "wall": "ext-e",
+     "type": "window",
+     "offset": 4.5,
+     "width": 0.7,
+     "sill": 0.9,
+     "height": 1.3,
+     "curtains": false
+    },
+    {
+     "id": "win-primary",
+     "wall": "ext-s",
+     "type": "window",
+     "offset": 1.9,
+     "width": 1.8,
+     "sill": 0.8,
+     "height": 1.4
+    },
+    {
+     "id": "door-front",
+     "wall": "ext-s",
+     "type": "door",
+     "offset": 6.8,
+     "width": 0.92,
+     "height": 2.1,
+     "exterior_door": true,
+     "color": "#3f4a4f",
+     "hinge": "a",
+     "swing": "+"
+    },
+    {
+     "id": "slider-living",
+     "wall": "ext-s",
+     "type": "sliding",
+     "offset": 10.8,
+     "width": 2.4,
+     "height": 2.1
+    },
+    {
+     "id": "win-living",
+     "wall": "ext-w",
+     "type": "window",
+     "offset": 4.2,
+     "width": 1.4,
+     "sill": 0.9,
+     "height": 1.3
+    },
+    {
+     "id": "win-kitchen-w",
+     "wall": "ext-w",
+     "type": "window",
+     "offset": 7.2,
+     "width": 1.2,
+     "sill": 0.9,
+     "height": 1.3
+    },
+    {
+     "id": "open-hall",
+     "wall": "w-great",
+     "type": "opening",
+     "offset": 4.5,
+     "width": 1.0,
+     "height": 2.1
+    },
+    {
+     "id": "open-foyer",
+     "wall": "w-great",
+     "type": "opening",
+     "offset": 7.2,
+     "width": 1.2,
+     "height": 2.1
+    },
+    {
+     "id": "door-bed2",
+     "wall": "w-hall-n",
+     "type": "door",
+     "offset": 2.3,
+     "width": 0.82,
+     "hinge": "b",
+     "swing": "-"
+    },
+    {
+     "id": "door-bath",
+     "wall": "w-hall-n",
+     "type": "door",
+     "offset": 3.95,
+     "width": 0.76,
+     "hinge": "b",
+     "swing": "-"
+    },
+    {
+     "id": "door-bed3",
+     "wall": "w-hall-n",
+     "type": "door",
+     "offset": 5.5,
+     "width": 0.82,
+     "hinge": "a",
+     "swing": "-"
+    },
+    {
+     "id": "door-primary",
+     "wall": "w-hall-s",
+     "type": "door",
+     "offset": 2.9,
+     "width": 0.82,
+     "hinge": "a",
+     "swing": "+"
+    },
+    {
+     "id": "door-ensuite",
+     "wall": "w-mid",
+     "type": "door",
+     "offset": 1.2,
+     "width": 0.76,
+     "hinge": "b",
+     "swing": "-"
+    },
+    {
+     "id": "open-wic",
+     "wall": "w-mid",
+     "type": "opening",
+     "offset": 3.45,
+     "width": 0.76,
+     "height": 2.04
+    }
+   ],
+   "furniture": [
+    {
+     "id": "kitchen-run",
+     "type": "counter",
+     "room": "kitchen",
+     "position": [
+      2.5625,
+      0.435
+     ],
+     "facing": "S",
+     "size": [
+      4.875,
+      0.62,
+      0.9
+     ],
+     "sink_at": 3.075,
+     "cooktop_at": 1.175,
+     "uppers": true,
+     "upper_gaps": [
+      [
+       2.15,
+       4.0
+      ]
+     ]
+    },
+    {
+     "id": "fridge",
+     "type": "fridge",
+     "room": "kitchen",
+     "position": [
+      5.47,
+      0.475
+     ],
+     "facing": "S",
+     "size": [
+      0.9,
+      0.7,
+      1.85
+     ]
+    },
+    {
+     "id": "pantry",
+     "type": "cabinet",
+     "room": "kitchen",
+     "position": [
+      6.12,
+      0.435
+     ],
+     "facing": "S",
+     "size": [
+      0.42,
+      0.62,
+      2.25
+     ]
+    },
+    {
+     "id": "island",
+     "type": "island",
+     "room": "kitchen",
+     "position": [
+      2.8,
+      2.45
+     ],
+     "facing": "S",
+     "size": [
+      2.4,
+      1.05,
+      0.92
+     ],
+     "color": "#7d8b78",
+     "stools": 3,
+     "accent": "#7a5a43"
+    },
+    {
+     "id": "dining",
+     "type": "table",
+     "room": "living",
+     "position": [
+      4.6,
+      5.75
+     ],
+     "facing": "S",
+     "size": [
+      1.8,
+      0.9,
+      0.75
+     ],
+     "material": "walnut",
+     "chairs": 6,
+     "chair_color": "#5d4636"
+    },
+    {
+     "id": "living-rug",
+     "type": "rug",
+     "room": "living",
+     "position": [
+      2.3,
+      7.6
+     ],
+     "facing": "S",
+     "size": [
+      2.4,
+      2.0
+     ],
+     "color": "#cfc6b6",
+     "accent": "#ddd5c7"
+    },
+    {
+     "id": "sofa",
+     "type": "sofa",
+     "room": "living",
+     "position": [
+      3.55,
+      7.6
+     ],
+     "facing": "W",
+     "size": [
+      2.3,
+      0.95,
+      0.82
+     ],
+     "material": "oatmeal_fabric",
+     "accent": "#c7a77d"
+    },
+    {
+     "id": "coffee",
+     "type": "coffee_table",
+     "room": "living",
+     "position": [
+      2.35,
+      7.6
+     ],
+     "facing": "W",
+     "size": [
+      1.1,
+      0.6,
+      0.4
+     ],
+     "material": "walnut"
+    },
+    {
+     "id": "media",
+     "type": "media_unit",
+     "room": "living",
+     "position": [
+      0.36,
+      7.6
+     ],
+     "facing": "E",
+     "size": [
+      1.9,
+      0.42,
+      0.5
+     ],
+     "material": "walnut",
+     "tv": 1.4
+    },
+    {
+     "id": "armchair",
+     "type": "armchair",
+     "room": "living",
+     "position": [
+      1.0,
+      8.8
+     ],
+     "rotation": 225,
+     "size": [
+      0.85,
+      0.85,
+      0.8
+     ],
+     "material": "slate_fabric"
+    },
+    {
+     "id": "floor-lamp",
+     "type": "lamp",
+     "room": "living",
+     "position": [
+      3.6,
+      9.15
+     ],
+     "facing": "S",
+     "size": [
+      0.4,
+      0.4,
+      1.6
+     ]
+    },
+    {
+     "id": "plant-living",
+     "type": "plant",
+     "room": "living",
+     "position": [
+      5.95,
+      9.1
+     ],
+     "facing": "S",
+     "size": [
+      0.5,
+      0.5,
+      1.2
+     ]
+    },
+    {
+     "id": "art-living",
+     "type": "art",
+     "room": "living",
+     "position": [
+      6.325,
+      8.75
+     ],
+     "facing": "W",
+     "size": [
+      0.9,
+      0.03,
+      0.7
+     ],
+     "elevation": 1.25
+    },
+    {
+     "id": "bed2-bed",
+     "type": "bed",
+     "room": "bed2",
+     "position": [
+      7.52,
+      1.9
+     ],
+     "facing": "E",
+     "size": [
+      1.6,
+      2.1,
+      1.05
+     ],
+     "color": "#d9d1c4",
+     "accent": "#e6e0d5",
+     "throw": "#7d8b78"
+    },
+    {
+     "id": "bed2-ns1",
+     "type": "nightstand",
+     "room": "bed2",
+     "position": [
+      6.69,
+      0.8
+     ],
+     "facing": "E",
+     "size": [
+      0.45,
+      0.4,
+      0.55
+     ]
+    },
+    {
+     "id": "bed2-ns2",
+     "type": "nightstand",
+     "room": "bed2",
+     "position": [
+      6.69,
+      3.0
+     ],
+     "facing": "E",
+     "size": [
+      0.45,
+      0.4,
+      0.55
+     ]
+    },
+    {
+     "id": "bed2-robe",
+     "type": "wardrobe",
+     "room": "bed2",
+     "position": [
+      9.04,
+      1.25
+     ],
+     "facing": "W",
+     "size": [
+      1.6,
+      0.6,
+      2.2
+     ]
+    },
+    {
+     "id": "bed2-art",
+     "type": "art",
+     "room": "bed2",
+     "position": [
+      6.475,
+      1.9
+     ],
+     "facing": "E",
+     "size": [
+      1.0,
+      0.03,
+      0.7
+     ],
+     "elevation": 1.3,
+     "accent": "#9aa79a"
+    },
+    {
+     "id": "tub",
+     "type": "bathtub",
+     "room": "bath",
+     "position": [
+      10.35,
+      0.505
+     ],
+     "facing": "S",
+     "size": [
+      1.7,
+      0.75,
+      0.56
+     ]
+    },
+    {
+     "id": "bath-vanity",
+     "type": "vanity",
+     "room": "bath",
+     "position": [
+      9.7,
+      2.0
+     ],
+     "facing": "E",
+     "size": [
+      0.9,
+      0.48,
+      0.85
+     ],
+     "material": "walnut"
+    },
+    {
+     "id": "bath-wc",
+     "type": "toilet",
+     "room": "bath",
+     "position": [
+      10.9,
+      2.3
+     ],
+     "facing": "W",
+     "size": [
+      0.38,
+      0.68,
+      0.8
+     ]
+    },
+    {
+     "id": "bed3-bed",
+     "type": "bed",
+     "room": "bed3",
+     "position": [
+      12.925,
+      1.9
+     ],
+     "facing": "W",
+     "size": [
+      1.4,
+      1.9,
+      1.0
+     ],
+     "color": "#c9cfd3",
+     "accent": "#eef0f0",
+     "throw": "#c7a77d"
+    },
+    {
+     "id": "bed3-ns1",
+     "type": "nightstand",
+     "room": "bed3",
+     "position": [
+      13.665,
+      0.85
+     ],
+     "facing": "W",
+     "size": [
+      0.42,
+      0.4,
+      0.55
+     ]
+    },
+    {
+     "id": "bed3-ns2",
+     "type": "nightstand",
+     "room": "bed3",
+     "position": [
+      13.665,
+      2.95
+     ],
+     "facing": "W",
+     "size": [
+      0.42,
+      0.4,
+      0.55
+     ]
+    },
+    {
+     "id": "bed3-desk",
+     "type": "desk",
+     "room": "bed3",
+     "position": [
+      13.1,
+      3.59
+     ],
+     "facing": "N",
+     "size": [
+      1.0,
+      0.5,
+      0.75
+     ],
+     "color": "#e9e5de"
+    },
+    {
+     "id": "bed3-chair",
+     "type": "chair",
+     "room": "bed3",
+     "position": [
+      13.1,
+      3.08
+     ],
+     "facing": "S",
+     "size": [
+      0.46,
+      0.5,
+      0.86
+     ]
+    },
+    {
+     "id": "hall-runner",
+     "type": "rug",
+     "room": "hall",
+     "position": [
+      10.6,
+      4.5
+     ],
+     "facing": "S",
+     "size": [
+      4.2,
+      0.8
+     ],
+     "color": "#b9ab95",
+     "accent": "#cbbfac"
+    },
+    {
+     "id": "foyer-console",
+     "type": "console",
+     "room": "hall",
+     "position": [
+      7.765,
+      8.3
+     ],
+     "facing": "W",
+     "size": [
+      1.0,
+      0.32,
+      0.8
+     ],
+     "material": "walnut"
+    },
+    {
+     "id": "foyer-art",
+     "type": "art",
+     "room": "hall",
+     "position": [
+      7.925,
+      8.3
+     ],
+     "facing": "W",
+     "size": [
+      0.8,
+      0.03,
+      0.6
+     ],
+     "elevation": 1.3,
+     "accent": "#b7a184"
+    },
+    {
+     "id": "foyer-plant",
+     "type": "plant",
+     "room": "hall",
+     "position": [
+      6.75,
+      6.0
+     ],
+     "facing": "S",
+     "size": [
+      0.45,
+      0.45,
+      1.1
+     ]
+    },
+    {
+     "id": "ens-shower",
+     "type": "shower",
+     "room": "ensuite",
+     "position": [
+      8.51,
+      5.62
+     ],
+     "facing": "S",
+     "size": [
+      0.9,
+      0.92,
+      2.0
+     ]
+    },
+    {
+     "id": "ens-vanity",
+     "type": "vanity",
+     "room": "ensuite",
+     "position": [
+      9.55,
+      5.4
+     ],
+     "facing": "S",
+     "size": [
+      1.0,
+      0.48,
+      0.85
+     ],
+     "color": "#e9e5de"
+    },
+    {
+     "id": "ens-wc",
+     "type": "toilet",
+     "room": "ensuite",
+     "position": [
+      8.6,
+      7.1
+     ],
+     "facing": "N",
+     "size": [
+      0.38,
+      0.68,
+      0.8
+     ]
+    },
+    {
+     "id": "wic-west",
+     "type": "shelving",
+     "room": "wic",
+     "position": [
+      8.31,
+      8.5
+     ],
+     "facing": "E",
+     "size": [
+      1.8,
+      0.5,
+      2.1
+     ]
+    },
+    {
+     "id": "wic-south",
+     "type": "shelving",
+     "room": "wic",
+     "position": [
+      9.25,
+      9.225
+     ],
+     "facing": "N",
+     "size": [
+      1.3,
+      0.5,
+      2.1
+     ]
+    },
+    {
+     "id": "primary-rug",
+     "type": "rug",
+     "room": "primary",
+     "position": [
+      12.4,
+      7.3
+     ],
+     "facing": "S",
+     "size": [
+      2.6,
+      3.0
+     ],
+     "color": "#d8cfbf",
+     "accent": "#e2dbcd"
+    },
+    {
+     "id": "primary-bed",
+     "type": "bed",
+     "room": "primary",
+     "position": [
+      12.8,
+      7.3
+     ],
+     "facing": "W",
+     "size": [
+      1.85,
+      2.15,
+      1.1
+     ],
+     "color": "#8e8a82",
+     "accent": "#efebe4",
+     "throw": "#7d8b78"
+    },
+    {
+     "id": "primary-ns1",
+     "type": "nightstand",
+     "room": "primary",
+     "position": [
+      13.665,
+      5.85
+     ],
+     "facing": "W",
+     "size": [
+      0.5,
+      0.42,
+      0.55
+     ],
+     "material": "walnut"
+    },
+    {
+     "id": "primary-ns2",
+     "type": "nightstand",
+     "room": "primary",
+     "position": [
+      13.665,
+      8.75
+     ],
+     "facing": "W",
+     "size": [
+      0.5,
+      0.42,
+      0.55
+     ],
+     "material": "walnut"
+    },
+    {
+     "id": "primary-dresser",
+     "type": "dresser",
+     "room": "primary",
+     "position": [
+      10.51,
+      7.42
+     ],
+     "facing": "E",
+     "size": [
+      1.2,
+      0.5,
+      0.85
+     ],
+     "material": "walnut"
+    },
+    {
+     "id": "primary-art",
+     "type": "art",
+     "room": "primary",
+     "position": [
+      13.86,
+      7.3
+     ],
+     "facing": "W",
+     "size": [
+      1.2,
+      0.03,
+      0.8
+     ],
+     "elevation": 1.35,
+     "accent": "#a8b2ac"
+    }
+   ],
+   "lights": [
+    {
+     "room": "kitchen",
+     "type": "pendant",
+     "position": [
+      2.2,
+      2.45
+     ],
+     "drop": 0.85
+    },
+    {
+     "room": "kitchen",
+     "type": "pendant",
+     "position": [
+      3.4,
+      2.45
+     ],
+     "drop": 0.85
+    },
+    {
+     "room": "living",
+     "type": "pendant",
+     "position": [
+      4.6,
+      5.75
+     ],
+     "drop": 0.85,
+     "radius": 0.24
+    },
+    {
+     "room": "living",
+     "type": "ceiling",
+     "position": [
+      2.6,
+      7.6
+     ]
+    },
+    {
+     "room": "bed2",
+     "type": "ceiling",
+     "position": [
+      7.9,
+      1.95
+     ]
+    },
+    {
+     "room": "bath",
+     "type": "ceiling",
+     "position": [
+      10.35,
+      2.0
+     ]
+    },
+    {
+     "room": "bed3",
+     "type": "ceiling",
+     "position": [
+      12.65,
+      1.95
+     ]
+    },
+    {
+     "room": "hall",
+     "type": "ceiling",
+     "position": [
+      7.2,
+      4.5
+     ]
+    },
+    {
+     "room": "hall",
+     "type": "ceiling",
+     "position": [
+      11.0,
+      4.5
+     ]
+    },
+    {
+     "room": "hall",
+     "type": "ceiling",
+     "position": [
+      7.2,
+      7.6
+     ]
+    },
+    {
+     "room": "ensuite",
+     "type": "ceiling",
+     "position": [
+      9.1,
+      6.3
+     ]
+    },
+    {
+     "room": "wic",
+     "type": "ceiling",
+     "position": [
+      9.1,
+      8.55
+     ]
+    },
+    {
+     "room": "primary",
+     "type": "ceiling",
+     "position": [
+      12.1,
+      7.35
+     ]
+    }
+   ]
+  }
+ ],
+ "viewpoints": [
+  {
+   "id": "kitchen-01",
+   "room": "kitchen",
+   "label": "Kitchen",
+   "position": [
+    6.0,
+    4.3,
+    1.5
+   ],
+   "target": [
+    2.0,
+    0.9,
+    1.0
+   ],
+   "fov": 62,
+   "photo": null
+  },
+  {
+   "id": "living-01",
+   "room": "living",
+   "label": "Living",
+   "position": [
+    0.55,
+    4.75,
+    1.5
+   ],
+   "target": [
+    4.6,
+    8.9,
+    0.95
+   ],
+   "fov": 62,
+   "photo": null
+  },
+  {
+   "id": "living-02",
+   "room": "living",
+   "label": "Living to TV wall",
+   "position": [
+    5.9,
+    4.9,
+    1.5
+   ],
+   "target": [
+    0.6,
+    8.6,
+    1.0
+   ],
+   "fov": 62,
+   "photo": null
+  },
+  {
+   "id": "entry-01",
+   "room": "hall",
+   "label": "Entry",
+   "position": [
+    7.2,
+    9.15,
+    1.55
+   ],
+   "target": [
+    7.2,
+    4.0,
+    1.35
+   ],
+   "fov": 62,
+   "photo": null
+  },
+  {
+   "id": "bed2-01",
+   "room": "bed2",
+   "label": "Bedroom 2",
+   "position": [
+    9.0,
+    3.45,
+    1.45
+   ],
+   "target": [
+    6.8,
+    1.0,
+    0.85
+   ],
+   "fov": 64,
+   "photo": null
+  },
+  {
+   "id": "bath-01",
+   "room": "bath",
+   "label": "Bathroom",
+   "position": [
+    10.2,
+    3.72,
+    1.5
+   ],
+   "target": [
+    10.45,
+    0.4,
+    0.95
+   ],
+   "fov": 74,
+   "photo": null
+  },
+  {
+   "id": "bed3-01",
+   "room": "bed3",
+   "label": "Bedroom 3",
+   "position": [
+    11.6,
+    3.55,
+    1.45
+   ],
+   "target": [
+    13.3,
+    0.7,
+    0.85
+   ],
+   "fov": 66,
+   "photo": null
+  },
+  {
+   "id": "primary-01",
+   "room": "primary",
+   "label": "Primary bedroom",
+   "position": [
+    11.05,
+    5.45,
+    1.5
+   ],
+   "target": [
+    13.3,
+    8.6,
+    0.85
+   ],
+   "fov": 64,
+   "photo": null
+  },
+  {
+   "id": "ensuite-01",
+   "room": "ensuite",
+   "label": "Ensuite",
+   "position": [
+    10.0,
+    7.3,
+    1.5
+   ],
+   "target": [
+    8.2,
+    5.5,
+    1.0
+   ],
+   "fov": 74,
+   "photo": null
+  }
+ ],
+ "scale_checks": [
+  {
+   "label": "Overall width, outside faces",
+   "plan_value_m": 14.25,
+   "measure": {
+    "kind": "overall_x"
+   }
+  },
+  {
+   "label": "Overall depth, outside faces",
+   "plan_value_m": 9.85,
+   "measure": {
+    "kind": "overall_y"
+   }
+  },
+  {
+   "label": "Living / Dining clear width",
+   "plan_value_m": 6.215,
+   "measure": {
+    "kind": "room_clear_x",
+    "room": "living"
+   }
+  },
+  {
+   "label": "Primary bedroom clear depth",
+   "plan_value_m": 4.315,
+   "measure": {
+    "kind": "room_clear_y",
+    "room": "primary"
+   }
+  }
+ ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "Demo Product",
+  "tagline": "A placeholder product used to test the sample pipeline on a new computer.",
+  "facts": ["Type a request and it is done in one click", "Every screen of the product, in one place"],
+  "cta": "Setup test · not a real product",
+  "url": "example.com",
+  "label": "Setup test render · placeholder screenshots",
+  "shots": ["../assets/shot-1.png", "../assets/shot-2.png", "../assets/shot-3.png"],
+  "logo": null,
+  "colors": { "stage": "#f4f2ee", "ink": "#16151a", "accent": "#4f4fe0" },
+  "focus": { "x": 0.18, "y": 0.13, "w": 0.62, "h": 0.42 }
+}

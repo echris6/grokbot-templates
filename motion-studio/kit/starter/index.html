@@ -1,0 +1,271 @@
+<!doctype html>
+<!--
+  Motion Studio starter: a 10 s launch sample built from a product's public screenshots, brand colours and verbatim facts.
+  Don't edit it by hand for a sample. Copy this folder into the job, write brief.json, then run
+    python3 /workspace/grokbot-templates/motion-studio/kit/scripts/fill.py --project <job>/film --brief <job>/brief.json --res 720
+  fill.py writes sample.config.js, copies the assets, picks readable colours and sets the size (720p Draft / 1080p).
+  Storyboard: STORYBOARD.md (cuts on a 120 BPM grid: 2.5, 5.5, 8.5). Rules: every pixel is a pure function of t
+  (render(t) below is the only clock), type is drawn on a 2x canvas, every change is a smooth crossfade, frame 0 is
+  the finished money shot, nothing sits in the bottom 90 px except the sample label on its backplate.
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Motion Studio sample</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script src="sample.config.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 100%; height: 100%; overflow: hidden; background: #0b0b0f; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; }
+      #stage { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; overflow: hidden; }
+      #bg, #type { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+      #glow { position: absolute; left: -300px; top: -200px; width: 2520px; height: 1480px; }
+      .card { position: absolute; left: 0; top: 0; overflow: hidden; border-radius: 22px; background: #fff; }
+      .card img { display: block; width: 100%; height: 100%; }
+      .shadow { box-shadow: 0 40px 90px rgba(0, 0, 0, 0.30), 0 8px 24px rgba(0, 0, 0, 0.18); }
+      #sweep, #hit { position: absolute; opacity: 0; pointer-events: none; }
+      #logo { position: absolute; left: 0; top: 0; height: 120px; width: auto; opacity: 0; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="10" data-width="1920" data-height="1080">
+      <div id="stage">
+        <div id="bg"></div>
+        <div id="glow" data-layout-allow-overflow></div>
+        <div id="cardB" class="card shadow"><img id="imgB" src="assets/shot-2.png" alt="" /></div>
+        <div id="cardC" class="card shadow"><img id="imgC" src="assets/shot-3.png" alt="" /></div>
+        <div id="cardA" class="card shadow"><img id="imgA" src="assets/shot-1.png" alt="" /><div id="sweep"></div><div id="hit"></div></div>
+        <img id="logo" src="assets/logo.png" alt="" />
+        <canvas id="type" width="3840" height="2160" data-layout-allow-overflow></canvas>
+      </div>
+    </div>
+    <script>
+      (function () {
+        const S = window.SAMPLE, C = S.colors;
+        const root = document.getElementById("root");
+        const K = Number(root.dataset.width) / 1920;   // authored at 1920x1080, scaled once
+        const DUR = 10;
+        const $ = (id) => document.getElementById(id);
+        const stage = $("stage"), canvas = $("type");
+        stage.style.transform = "scale(" + K + ")";
+        canvas.width = Math.round(3840 * K); canvas.height = Math.round(2160 * K);
+        const ctx = canvas.getContext("2d");
+
+        // ---------- pure helpers: no clocks, no randomness ----------
+        const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+        const lerp = (a, b, t) => a + (b - a) * t;
+        const smoother = (x) => { x = clamp(x); return x * x * x * (x * (x * 6 - 15) + 10); };
+        const win = (t, a, b) => smoother((t - a) / (b - a));
+        const arrive = (x) => 1 - Math.pow(1 - clamp(x), 4);   // slows into its landing
+        const leave = (x) => Math.pow(clamp(x), 3);             // leaves fast
+        const elerp = (a, b, t) => Math.exp(lerp(Math.log(a), Math.log(b), t));   // scale moves feel linear
+
+        $("bg").style.background = C.stage;
+        $("glow").style.background = "radial-gradient(900px 640px at 50% 50%, " + C.glow + ", transparent 70%)";
+        if (!S.logo) $("logo").style.display = "none";
+        const f = S.focus;
+
+        let G = null;   // geometry, measured once after images load
+        function geometry() {
+          const ar = (img) => (img.naturalWidth && img.naturalHeight ? img.naturalWidth / img.naturalHeight : 1.6);
+          const fit = (aspect, maxW, maxH) => (maxW / aspect <= maxH ? { w: maxW, h: maxW / aspect } : { w: maxH * aspect, h: maxH });
+          const A = fit(ar($("imgA")), 1100, 740), B = fit(ar($("imgB")), 1120, 640), Cc = fit(ar($("imgC")), 1120, 640);
+          const fAspect = (f.w * A.w) / (f.h * A.h);
+          const T = fit(fAspect, 1560, 700);                    // the lifted panel: about 80% of the frame width
+          T.x = 960; T.y = 540;
+          const sT = T.w / (f.w * A.w);                         // card scale that maps the focus box onto T
+          const dx = (f.x + f.w / 2 - 0.5) * A.w, dy = (f.y + f.h / 2 - 0.5) * A.h;
+          [["cardA", A], ["cardB", B], ["cardC", Cc]].forEach(([id, d]) => { $(id).style.width = d.w + "px"; $(id).style.height = d.h + "px"; });
+          Object.assign($("sweep").style, { left: f.x * 100 + "%", top: f.y * 100 + "%", width: f.w * 100 + "%", height: f.h * 100 + "%",
+            background: "linear-gradient(100deg, transparent 0%, " + C.action + "55 45%, transparent 70%)", backgroundSize: "300% 100%" });
+          Object.assign($("hit").style, { left: f.x * 100 + "%", top: f.y * 100 + "%", width: f.w * 100 + "%", height: f.h * 100 + "%",
+            boxShadow: "inset 0 0 0 " + (5 / sT).toFixed(2) + "px " + C.action + ", inset 0 0 " + (60 / sT).toFixed(1) + "px " + C.action + "44" });
+          const pill = { w: Math.min(1320, T.w * 0.86), h: 128 };
+          pill.x = 960; pill.y = Math.min(T.y + T.h / 2 - 8, 930);   // docked on the panel's lower edge, above the label zone
+          G = { A, B, C: Cc, T, sT, dx, dy, pill };
+        }
+
+        function place(el, d, x, y, s, ry, rx, rz, op) {
+          el.style.transform = "translate(" + (x - d.w / 2) + "px," + (y - d.h / 2) + "px) perspective(2000px) rotateY(" + ry + "deg) rotateX(" + rx + "deg) rotateZ(" + rz + "deg) scale(" + s + ")";
+          el.style.opacity = op;
+        }
+
+        // ---------- type on canvas ----------
+        let FONT = "Display";
+        const font = (size, weight) => weight + " " + size + "px " + FONT + ", sans-serif";
+        function fitSize(text, size, weight, maxW, minSize) {
+          ctx.font = font(size, weight); const w = ctx.measureText(text).width;
+          return Math.max(minSize || 1, w > maxW ? Math.floor(size * maxW / w) : size);
+        }
+        function wrap(text, size, weight, maxW) {
+          ctx.font = font(size, weight); const out = []; let line = "";
+          for (const word of text.split(/\s+/)) {
+            const next = line ? line + " " + word : word;
+            if (ctx.measureText(next).width > maxW && line) { out.push(line); line = word; } else line = next;
+          }
+          if (line) out.push(line); return out;
+        }
+        // One fillText of the whole line per word, clipped to that word's box: natural kerning, per-word rise.
+        function line(text, x, y, size, weight, color, inT, outT, align, alpha = 1) {
+          if (!text || alpha <= 0) return;
+          ctx.font = font(size, weight);
+          const full = ctx.measureText(text).width, x0 = align === "center" ? x - full / 2 : x;
+          const words = text.split(" "); let prefix = "";
+          words.forEach((wd, i) => {
+            const a = ctx.measureText(prefix).width, b = ctx.measureText(prefix + wd).width; prefix += wd + " ";
+            const local = clamp(inT * (1 + words.length * 0.16) - i * 0.16);
+            const rise = (1 - arrive(local)) * size * 0.9 - leave(outT) * size * 0.6;
+            const op = alpha * smoother(local) * (1 - smoother(outT));
+            if (op <= 0.001) return;
+            ctx.save(); ctx.beginPath(); ctx.rect(x0 + a - 4, y - size * 1.1, b - a + 8, size * 1.45); ctx.clip();
+            ctx.globalAlpha = op; ctx.fillStyle = color; ctx.fillText(text, x0, y + rise); ctx.restore();
+          });
+        }
+        function rrect(x, y, w, h, r) { ctx.beginPath(); ctx.roundRect(x, y, w, h, r); }
+
+        let L = null;
+        function layout() {
+          L = { nameSize: fitSize(S.name, 128, 700, 560, 60), tag: wrap(S.tagline, 40, 500, 540).slice(0, 3),
+                f1Size: fitSize(S.facts[0], 46, 550, G.pill.w - 210, 26),
+                f2: S.facts[1] || S.facts[0], f2Size: fitSize(S.facts[1] || S.facts[0], 54, 650, 1560, 30),
+                endSize: fitSize(S.name, 150, 700, 1500, 60), ctaSize: fitSize(S.cta, 46, 600, 1400, 24) };
+        }
+
+        // ---------- the one render function ----------
+        function render(t) {
+          const { A, B, T, sT, dx, dy, pill } = G;
+          $("glow").style.transform = "translate(" + lerp(-240, 240, t / DUR) + "px," + lerp(70, -70, t / DUR) + "px)";
+
+          // Card A: S1 tilted hero -> its focus region lifts out to fill the frame (S2) -> recedes (5.2-5.75).
+          const u = win(t, 2.15, 2.95), clipU = win(t, 2.1, 2.5), push = lerp(1, 1.09, win(t, 2.95, 5.25)), out = win(t, 5.2, 5.75);
+          const s1 = { x: lerp(1310, 1250, t / 2.5), y: lerp(575, 555, t / 2.5), s: lerp(1, 1.08, t / 2.5) };
+          const s2s = sT * push * lerp(1, 0.86, out);
+          const s2 = { x: T.x - dx * s2s + lerp(16, -16, win(t, 2.95, 5.2)), y: T.y - dy * s2s - 40 * out };
+          const sc = elerp(s1.s, s2s, u);
+          const cx = lerp(s1.x, s2.x, u), cy = lerp(s1.y, s2.y, u);
+          place($("cardA"), A, cx, cy, sc, lerp(lerp(-20, -10, t / 2.5), 0, u), lerp(6, 0, u), 0, 1 - win(t, 5.3, 5.75));
+          const ins = [f.y, 1 - f.x - f.w, 1 - f.y - f.h, f.x].map((v) => (v * 100 * clipU).toFixed(3) + "%");
+          $("cardA").style.clipPath = "inset(" + ins.join(" ") + " round " + (22 / lerp(1, sc, clipU)).toFixed(2) + "px)";
+
+          // Effect of the click: the panel answers with a sweep and a held outline.
+          const sw = win(t, 4.5, 5.15);
+          $("sweep").style.opacity = Math.sin(Math.PI * sw).toFixed(3);
+          $("sweep").style.backgroundPosition = lerp(100, 0, sw) + "% 0";
+          $("hit").style.opacity = (win(t, 4.55, 4.85) * (1 - win(t, 5.15, 5.4))).toFixed(3);
+
+          // Cards B and C rise (S3), fan, C is selected and comes forward, then both fold into the end card.
+          const end = win(t, 7.95, 8.4);
+          [["cardB", B, 5.2, 700, -5, 0], ["cardC", G.C, 5.35, 1215, 5, 1]].forEach(([id, d, t0, fx, rz, sel]) => {
+            const up = arrive((t - t0) / 0.7), fan = win(t, 5.85, 6.9), pick = sel ? win(t, 6.7, 7.2) : 0;
+            const x = lerp(lerp(960, fx, fan), 960, end), y = lerp(lerp(1500, 600, up) - 14 * pick, 330, end);
+            const s = lerp(lerp(0.94, 1, up) * lerp(1, 1.07, win(t, 5.85, 7.95)) * (1 + 0.05 * pick), 0.28, end);
+            place($(id), d, x, y, s, 0, lerp(8, 0, up), lerp(0, rz, fan) * (1 - pick * 0.6) * (1 - end), clamp(up * 4) * (1 - win(t, 8.1, 8.38)));
+            if (sel) $(id).style.boxShadow = "0 0 0 " + (6 * pick).toFixed(2) + "px " + C.action + ", 0 40px 90px rgba(0,0,0,.30)";
+          });
+
+          if (S.logo) {
+            const li = arrive((t - 8.35) / 0.5), lh = 120, im = $("logo"), lw = im.naturalWidth ? lh * im.naturalWidth / im.naturalHeight : lh;
+            im.style.transform = "translate(" + (960 - lw / 2) + "px," + (330 - lh / 2) + "px) scale(" + lerp(0.85, 1, li) + ")";
+            im.style.opacity = smoother(li);
+          }
+
+          // ---------- canvas layer ----------
+          ctx.setTransform(2 * K, 0, 0, 2 * K, 0, 0); ctx.clearRect(0, 0, 1920, 1080); ctx.textBaseline = "alphabetic";
+          const s1out = win(t, 2.05, 2.4);
+          line(S.name, 120, 465, L.nameSize, 700, C.ink, 1, s1out, "left");
+          L.tag.forEach((tl, i) => line(tl, 122, 552 + i * 52, 40, 500, C.ink, 1, s1out, "left", 0.8));
+
+          // S2: a command bar docked on the panel; fact 1 types in; a cursor clicks; the state changes.
+          const pin = arrive((t - 2.9) / 0.45), pout = win(t, 5.15, 5.5);
+          if (pin > 0 && pout < 1) {
+            const py = pill.y + (1 - pin) * 60 - pout * 40, px0 = pill.x - pill.w / 2, a = smoother(pin) * (1 - pout);
+            const done = win(t, 4.45, 4.7);
+            ctx.save(); ctx.globalAlpha = a;
+            ctx.shadowColor = "rgba(0,0,0,0.28)"; ctx.shadowBlur = 40; ctx.shadowOffsetY = 14;
+            rrect(px0, py - pill.h / 2, pill.w, pill.h, pill.h / 2); ctx.fillStyle = C.panel; ctx.fill();
+            ctx.shadowColor = "transparent"; ctx.lineWidth = 3; ctx.strokeStyle = C.action; ctx.globalAlpha = a * lerp(0.45, 1, done); ctx.stroke();
+            ctx.globalAlpha = a;
+            // typed text: whole characters plus a fading partial one (a crossfade, not a pop)
+            const txt = S.facts[0], p = txt.length * clamp((t - 3.2) / 0.95), n = Math.floor(p);
+            ctx.font = font(L.f1Size, 550); ctx.fillStyle = C.ink;
+            const tx = px0 + 56, ty = py + L.f1Size * 0.36;
+            ctx.fillText(txt.slice(0, n), tx, ty);
+            if (n < txt.length) { ctx.globalAlpha = a * (p - n); ctx.fillText(txt.slice(0, n + 1), tx, ty); ctx.globalAlpha = a; }
+            const caretX = tx + ctx.measureText(txt.slice(0, Math.min(n + 1, txt.length))).width + 6;
+            ctx.globalAlpha = a * (0.55 + 0.45 * Math.cos(t * Math.PI * 3.2)) * (1 - done);
+            ctx.fillStyle = C.action; ctx.fillRect(caretX, py - L.f1Size * 0.62, 3, L.f1Size * 1.1); ctx.globalAlpha = a;
+            // the button: arrow -> pressed -> filled with a check
+            const bx = px0 + pill.w - 70, press = Math.sin(Math.PI * win(t, 4.28, 4.52)), br = 44 * (1 - 0.12 * press);
+            ctx.beginPath(); ctx.arc(bx, py, br, 0, Math.PI * 2);
+            ctx.fillStyle = C.action; ctx.globalAlpha = a * lerp(0.16, 1, done); ctx.fill(); ctx.globalAlpha = a;
+            ctx.lineWidth = 4; ctx.lineCap = "round"; ctx.lineJoin = "round";
+            ctx.strokeStyle = C.action; ctx.globalAlpha = a * (1 - done);
+            ctx.beginPath(); ctx.moveTo(bx - 15, py); ctx.lineTo(bx + 15, py); ctx.moveTo(bx + 3, py - 12); ctx.lineTo(bx + 15, py); ctx.lineTo(bx + 3, py + 12); ctx.stroke();
+            ctx.strokeStyle = C.onAction; ctx.globalAlpha = a * done;
+            const ck = win(t, 4.5, 4.75);
+            ctx.beginPath(); ctx.moveTo(bx - 16, py + 1); ctx.lineTo(bx - 5, py + 12);
+            ctx.lineTo(lerp(bx - 5, bx + 17, ck), lerp(py + 12, py - 12, ck)); ctx.stroke();
+            const rp = win(t, 4.3, 4.85);                         // ripple
+            if (rp > 0 && rp < 1) { ctx.globalAlpha = a * (1 - rp) * 0.8; ctx.strokeStyle = C.action; ctx.lineWidth = 3;
+              ctx.beginPath(); ctx.arc(bx, py, 44 + 70 * rp, 0, Math.PI * 2); ctx.stroke(); }
+            ctx.restore();
+            // the cursor: travels to the button, presses, drifts off
+            const cIn = arrive((t - 3.55) / 0.75), cOut = win(t, 4.95, 5.3);
+            if (cIn > 0 && cOut < 1) {
+              const cxp = lerp(1580, bx + 6, cIn) + 30 * cOut, cyp = lerp(1010, py + 8, cIn) + 20 * cOut, cs = 1.9 * (1 - 0.12 * press);
+              ctx.save(); ctx.globalAlpha = smoother(cIn * 3) * (1 - cOut); ctx.translate(cxp, cyp); ctx.scale(cs, cs);
+              ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(0, 30); ctx.lineTo(8, 23); ctx.lineTo(13, 34); ctx.lineTo(18, 32); ctx.lineTo(13, 21); ctx.lineTo(23, 21); ctx.closePath();
+              ctx.shadowColor = "rgba(0,0,0,0.35)"; ctx.shadowBlur = 8; ctx.shadowOffsetY = 3;
+              ctx.fillStyle = "#ffffff"; ctx.fill(); ctx.shadowColor = "transparent"; ctx.lineWidth = 2; ctx.strokeStyle = "#111111"; ctx.stroke();
+              ctx.restore();
+            }
+          }
+
+          line(L.f2, 960, 150, L.f2Size, 650, C.ink, (t - 5.8) / 0.45, win(t, 7.75, 8.0), "center");
+
+          // End card (8.5-10): name, CTA, URL, an underline that draws, and a slow push. No hold without motion.
+          const drift = lerp(1, 1.12, win(t, 8.3, 10));
+          ctx.save(); ctx.translate(960, 560); ctx.scale(drift, drift); ctx.translate(-960, -560);
+          const endY = S.logo ? 545 : 505;
+          line(S.name, 960, endY, L.endSize, 700, C.ink, (t - 8.25) / 0.45, 0, "center");
+          ctx.font = font(L.endSize, 700);
+          const ul = win(t, 8.55, 9.4) * ctx.measureText(S.name).width * 0.5;
+          ctx.globalAlpha = win(t, 8.5, 8.7); ctx.fillStyle = C.action; ctx.fillRect(960 - ul / 2, endY + 30, ul, 5); ctx.globalAlpha = 1;
+          const swp = win(t, 8.95, 9.85);
+          if (swp > 0 && swp < 1) {
+            ctx.save(); ctx.font = font(L.endSize, 700); const nw = ctx.measureText(S.name).width;
+            const gx = lerp(960 - nw / 2 - 200, 960 + nw / 2 + 200, swp), g = ctx.createLinearGradient(gx - 160, 0, gx + 160, 0);
+            g.addColorStop(0, C.stage + "00"); g.addColorStop(0.5, C.action); g.addColorStop(1, C.stage + "00");
+            ctx.globalAlpha = 0.55 * Math.sin(Math.PI * swp); ctx.fillStyle = g; ctx.fillText(S.name, 960 - nw / 2, endY); ctx.restore();
+          }
+          line(S.cta, 960, endY + 112, L.ctaSize, 600, C.cta, (t - 8.4) / 0.45, 0, "center");
+          line(S.url || "", 960, endY + 172, 34, 500, C.ink, (t - 8.55) / 0.45, 0, "center", 0.75);
+          ctx.restore();
+
+          // The sample label: every frame, on its own backplate, in the reserved bottom band.
+          if (S.label) {
+            ctx.font = font(25, 600); const lw = ctx.measureText(S.label).width;
+            ctx.globalAlpha = 0.9; rrect(36, 1010, lw + 40, 48, 24); ctx.fillStyle = C.stage; ctx.fill();
+            ctx.globalAlpha = 1; ctx.fillStyle = C.ink; ctx.fillText(S.label, 56, 1043);
+          }
+        }
+
+        // ---------- build once (font + images), then register the paused timeline ----------
+        const face = new FontFace("Display", "url(assets/fonts/display.ttf)", { weight: "100 900" });   // variable or static
+        const fontReady = face.load().then((ff) => { document.fonts.add(ff); }).catch(() => { FONT = "sans-serif"; });
+        const imgs = Array.from(document.querySelectorAll("img")).map((im) => im.decode().catch(() => {}));
+        Promise.all([fontReady].concat(imgs)).then(() => {
+          geometry(); layout();
+          const st = { t: 0 };
+          const tl = gsap.timeline({ paused: true });
+          tl.to(st, { t: DUR, duration: DUR, ease: "none", onUpdate: () => render(st.t) }, 0);
+          render(0);
+          window.addEventListener("hf-seek", (e) => render(e.detail.time));
+          window.__timelines["main"] = tl;
+        });
+      })();
+    </script>
+  </body>
+</html>

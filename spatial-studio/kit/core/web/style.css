@@ -1,0 +1,41 @@
+:root {
+  --ink: #23211e; --muted: #6d675f; --paper: rgba(250, 248, 244, 0.92); --line: rgba(35, 33, 30, 0.12);
+  --accent: #8a6a46; --bg: #e9e6e0;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --ink: #f2efe9; --muted: #b6afa4; --paper: rgba(32, 31, 29, 0.9); --line: rgba(255, 255, 255, 0.14); --bg: #1d1c1a; }
+}
+:root[data-theme="dark"] { --ink: #f2efe9; --muted: #b6afa4; --paper: rgba(32, 31, 29, 0.9); --line: rgba(255, 255, 255, 0.14); --bg: #1d1c1a; }
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: var(--bg); color: var(--ink); }
+#view, #overlay { position: fixed; inset: 0; width: 100vw; height: 100vh; display: block; }
+#overlay { pointer-events: none; }
+#bar { position: fixed; top: 12px; left: 12px; right: 12px; display: flex; gap: 12px; align-items: center; justify-content: space-between; pointer-events: none; }
+#bar > * { pointer-events: auto; }
+.title { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px; display: flex; gap: 10px; align-items: center; max-width: 60vw; backdrop-filter: blur(6px); }
+.title strong { font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.badge { font-size: 11px; color: var(--muted); border-left: 1px solid var(--line); padding-left: 10px; white-space: nowrap; }
+.modes { display: flex; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 3px; backdrop-filter: blur(6px); }
+.modes button { appearance: none; border: 0; background: transparent; color: var(--ink); font: inherit; font-size: 13px; padding: 7px 12px; border-radius: 7px; cursor: pointer; }
+.modes button.on { background: var(--ink); color: var(--bg); }
+#rooms { position: fixed; top: 70px; left: 12px; width: 200px; max-height: calc(100vh - 140px); overflow: auto; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px; backdrop-filter: blur(6px); }
+#rooms h2 { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 2px 4px 8px; font-weight: 600; }
+#rooms ul { list-style: none; margin: 0; padding: 0; }
+#rooms li button { width: 100%; text-align: left; appearance: none; border: 0; background: transparent; color: var(--ink); font: inherit; font-size: 13px; padding: 7px 8px; border-radius: 6px; cursor: pointer; }
+#rooms li button:hover, #rooms li button.on { background: var(--line); }
+#hint { position: fixed; bottom: 14px; left: 50%; transform: translateX(-50%); background: var(--paper); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; font-size: 12px; color: var(--muted); white-space: nowrap; }
+#crosshair { position: fixed; left: 50%; top: 50%; width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%; background: rgba(255, 255, 255, 0.85); box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35); pointer-events: none; }
+#error { position: fixed; inset: 30% 10% auto; background: #fff3f0; color: #7a1f12; border: 1px solid #e3b5ab; border-radius: 10px; padding: 16px; font-size: 14px; white-space: pre-wrap; }
+/* Phones and touch: rooms become a bottom strip of tap-to-jump chips. */
+@media (max-width: 760px), (pointer: coarse) {
+  #rooms { top: auto; bottom: 12px; left: 12px; right: 12px; width: auto; max-height: none; padding: 6px; overflow-x: auto; overflow-y: hidden; }
+  #rooms h2 { display: none; }
+  #rooms ul { display: flex; gap: 6px; }
+  #rooms li button { white-space: nowrap; background: var(--line); padding: 9px 12px; }
+  #hint { bottom: 72px; white-space: normal; text-align: center; max-width: calc(100vw - 32px); border-radius: 12px; }
+  .title { max-width: 46vw; }
+  .badge { display: none; }
+}
+/* Deterministic capture: no UI at all. */
+body.capture #bar, body.capture #rooms, body.capture #hint, body.capture #crosshair { display: none !important; }

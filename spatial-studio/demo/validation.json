@@ -1,0 +1,104 @@
+{
+  "file": "demo/sample-house.json",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "info": [
+    "level L1: 9 rooms, 12 walls, 18 openings, 41 furniture items",
+    "level L1: area gross 140.4 m² (1511 sq ft) · centreline 134.4 m² · clear floor 123.7 m²",
+    "area: plan states 140.4 m² (1511 sq ft); spec gross 140.4 m² (-0.0%), clear 123.7 m² (-11.9%) → OK",
+    "scale \"Overall width, outside faces\": plan 14.250 m, spec 14.250 m (+0.0 cm) → OK",
+    "scale \"Overall depth, outside faces\": plan 9.850 m, spec 9.850 m (+0.0 cm) → OK",
+    "scale \"Living / Dining clear width\": plan 6.215 m, spec 6.215 m (+0.0 cm) → OK",
+    "scale \"Primary bedroom clear depth\": plan 4.315 m, spec 4.315 m (+0.0 cm) → OK",
+    "room wic has no viewpoint (fine if there is no photo of it)"
+  ],
+  "levels": [
+    {
+      "id": "L1",
+      "rooms": [
+        {
+          "id": "kitchen",
+          "name": "Kitchen",
+          "area": 28.16
+        },
+        {
+          "id": "living",
+          "name": "Living / Dining",
+          "area": 33.28
+        },
+        {
+          "id": "bed2",
+          "name": "Bedroom 2",
+          "area": 11.7
+        },
+        {
+          "id": "bath",
+          "name": "Bathroom",
+          "area": 7.41
+        },
+        {
+          "id": "bed3",
+          "name": "Bedroom 3",
+          "area": 10.53
+        },
+        {
+          "id": "hall",
+          "name": "Entry / Hall",
+          "area": 16.32
+        },
+        {
+          "id": "ensuite",
+          "name": "Ensuite",
+          "area": 5.28
+        },
+        {
+          "id": "wic",
+          "name": "Walk-in robe",
+          "area": 4.62
+        },
+        {
+          "id": "primary",
+          "name": "Primary bedroom",
+          "area": 17.1
+        }
+      ],
+      "area_centreline_m2": 134.4,
+      "area_gross_m2": 140.36,
+      "area_clear_m2": 123.66
+    }
+  ],
+  "area": {
+    "stated_m2": 140.4,
+    "gross_m2": 140.36,
+    "clear_m2": 123.66,
+    "closest": "gross",
+    "diff_pct": -0.03
+  },
+  "scale_checks": [
+    {
+      "label": "Overall width, outside faces",
+      "plan": 14.25,
+      "spec": 14.25,
+      "diff_m": 0
+    },
+    {
+      "label": "Overall depth, outside faces",
+      "plan": 9.85,
+      "spec": 9.85,
+      "diff_m": 0
+    },
+    {
+      "label": "Living / Dining clear width",
+      "plan": 6.215,
+      "spec": 6.215,
+      "diff_m": 0
+    },
+    {
+      "label": "Primary bedroom clear depth",
+      "plan": 4.315,
+      "spec": 4.315,
+      "diff_m": 0
+    }
+  ]
+}

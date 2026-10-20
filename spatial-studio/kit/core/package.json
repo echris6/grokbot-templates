@@ -1,0 +1,22 @@
+{
+  "name": "spatial-studio-core",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Spatial Studio three.js engine: house spec -> walkable site, deterministic captures, spec validation, Whop site packaging.",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "vendor": "node scripts/vendor-three.mjs",
+    "validate": "node validate-spec.mjs",
+    "capture": "node capture.mjs",
+    "plan": "node plan-svg.mjs",
+    "serve": "node serve.mjs",
+    "site": "node build-site.mjs",
+    "demo": "node scripts/run-demo.mjs"
+  },
+  "dependencies": {
+    "ajv": "8.17.1",
+    "playwright": "1.64.1",
+    "three": "0.186.1"
+  }
+}

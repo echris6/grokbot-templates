@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Interactive Floor Plan</title>
+  <link rel="stylesheet" href="./style.css" />
+  <!-- three.js is vendored (exact version in vendor/three/VERSION): no CDN, works offline and on Whop hosting. -->
+  <script type="importmap">
+    { "imports": { "three": "./vendor/three/three.module.js" } }
+  </script>
+</head>
+<body>
+  <canvas id="view"></canvas>
+  <canvas id="overlay"></canvas>
+  <header id="bar">
+    <div class="title"><strong id="house-name">Loading…</strong><span id="badge" class="badge" hidden></span></div>
+    <nav class="modes" aria-label="View mode">
+      <button data-mode="walk" class="on">Walk</button>
+      <button data-mode="dollhouse">Dollhouse</button>
+      <button data-mode="plan">Plan</button>
+    </nav>
+  </header>
+  <aside id="rooms" aria-label="Rooms"><h2>Rooms</h2><ul id="room-list"></ul></aside>
+  <div id="hint"></div>
+  <div id="crosshair" hidden></div>
+  <div id="error" hidden></div>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+[
+  ["whoosh", 2.18, 3, "S1 -> S2: the focus region lifts out"],
+  ["tick", 3.35, 1, "typing"],
+  ["tick", 3.7, 1, "typing"],
+  ["tick", 4.02, 1, "typing"],
+  ["click", 4.3, 7, "button press (hero action, own cap)", -50, 8],
+  ["pop", 4.48, 5, "state change: check + panel answers"],
+  ["whoosh", 5.2, 3, "S2 -> S3: screens rise"],
+  ["tick", 6.7, 3, "selection lands on the second screen"]
+]
